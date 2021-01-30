@@ -6,20 +6,38 @@ HELP = """Доступные команды:
 
 print(HELP)
 
-tasks = []
+tasks = {
+  # 'today': [],
+  # 'tomorrow': [],
+  # 'other': []
+}
 
 while True:
-  command = input('Введите команду: ')
-  command = command.strip().lower()
+  command = input('Введите команду: ').strip().lower()
   if command == 'help':
     print(HELP)
   elif command == 'add':
-    inputTask = input("Введите задачу: ")
-    tasks.append(inputTask)
-    print(f'Задача \'{inputTask}\' добавлена.')
+    inputDate = input("> Введите дату: ").strip().lower()
+    inputTask = input("> Введите задачу: ")
+
+    listName = 'other'
+
+    if inputDate == 'today' or inputDate == 'сегодня':
+      listName = 'today'
+    elif inputDate == 'tomorrow' or inputDate == 'завтра':
+      listName = 'tomorrow'
+
+    if listName in tasks:
+      tasks[listName].append(inputTask)
+    else:
+      tasks[listName] = [inputTask]
+
+    print(f'Задача \'{inputTask}\' добавлена в список \'{listName}\'.')
   elif command == 'print':
-    for task in tasks:
-      print(f'- {task}')
+    for date, tasklist in tasks.items():
+      print(f'📅 {date.upper()}:')
+      for task in tasklist:
+        print(f'- {task}')
   elif command == 'exit':
     break
   else:
