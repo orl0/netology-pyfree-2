@@ -39,6 +39,7 @@ while True:
       for task in tasklist:
         print(f'- {task}')
   elif command == 'exit':
+    print('Спасибо за использование! До свидания!')
     break
   else:
     print('(!) Неизвестная команда')
